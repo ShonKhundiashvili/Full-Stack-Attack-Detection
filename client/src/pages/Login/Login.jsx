@@ -1,3 +1,13 @@
+import {
+  Form,
+  Wrapper,
+  SubmitButton,
+  FieldWrapper,
+  Input,
+  Title,
+  ForgotPassword,
+} from "./Login.style";
+
 function Login() {
   function handleSubmit(event) {
     event.preventDefault();
@@ -6,14 +16,27 @@ function Login() {
     const data = Object.fromEntries(formData.entries());
     console.log(data);
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Email</label>
-      <input name="Email" type="email" />
-      <label>Password</label>
-      <input name="Password" type="password" />
-      <button>Submit</button>
-    </form>
+    <Wrapper>
+      <Form onSubmit={handleSubmit}>
+        <Title>Login</Title>
+        <FieldWrapper>
+          <label>Email</label>
+          <Input name="Email" type="email" placeholder="Type you email" />
+        </FieldWrapper>
+        <FieldWrapper>
+          <label>Password</label>
+          <Input
+            name="Password"
+            type="password"
+            placeholder="Type your password"
+          />
+        </FieldWrapper>
+        <ForgotPassword to="/ForgotPassword">Forgot password?</ForgotPassword>
+        <SubmitButton>Submit</SubmitButton>
+      </Form>
+    </Wrapper>
   );
 }
 
