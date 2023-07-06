@@ -6,7 +6,12 @@ import {
   Input,
   Title,
   ForgotPassword,
+  Icon,
 } from "./Login.style";
+
+import logo from './image.png';
+import userIcon from './user.png';
+import pswIcon from './padlock.png';
 
 function Login() {
   function handleSubmit(event) {
@@ -19,14 +24,14 @@ function Login() {
 
   return (
     <Wrapper>
+      <Title src={logo} alt="logo" />
       <Form onSubmit={handleSubmit}>
-        <Title>Login</Title>
         <FieldWrapper>
-          <label>Email</label>
+          <Icon src={userIcon} alt="userIcon" />
           <Input name="Email" type="email" placeholder="Type you email" />
         </FieldWrapper>
         <FieldWrapper>
-          <label>Password</label>
+          <Icon src={pswIcon} alt="pswIcon" />
           <Input
             name="Password"
             type="password"
@@ -34,7 +39,7 @@ function Login() {
           />
         </FieldWrapper>
         <ForgotPassword to="/ForgotPassword">Forgot password?</ForgotPassword>
-        <SubmitButton>Submit</SubmitButton>
+        <SubmitButton>LOGIN</SubmitButton>
       </Form>
     </Wrapper>
   );
