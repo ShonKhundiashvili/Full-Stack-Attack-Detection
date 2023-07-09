@@ -7,13 +7,21 @@ import {
   Title,
   ForgotPassword,
   Icon,
+  Fields,
+  LottieLogo,
+  LogoWrapper,
+  RegisterField,
 } from "./Login.style";
 
-import logo from './image.png';
+import { useNavigate } from "react-router-dom";
 import userIcon from './user.png';
 import pswIcon from './padlock.png';
+import AnimatedLogo from '../../assets/EDgL26btNA.json'
 
 function Login() {
+
+  const navigate = useNavigate();
+
   function handleSubmit(event) {
     event.preventDefault();
     const { target } = event;
@@ -22,24 +30,41 @@ function Login() {
     console.log(data);
   }
 
+  function navigateHomePage() {
+    navigate('/home');
+  }
+
+  function navigateRegister() {
+    navigate('/home');
+  }
+
   return (
     <Wrapper>
-      <Title src={logo} alt="logo" />
+      <LogoWrapper>
+        <Title>ATTACK</Title>
+        <LottieLogo animationData={AnimatedLogo} />
+        <Title>METER</Title>
+      </LogoWrapper>
       <Form onSubmit={handleSubmit}>
-        <FieldWrapper>
-          <Icon src={userIcon} alt="userIcon" />
-          <Input name="Email" type="email" placeholder="Type you email" />
-        </FieldWrapper>
-        <FieldWrapper>
-          <Icon src={pswIcon} alt="pswIcon" />
-          <Input
-            name="Password"
-            type="password"
-            placeholder="Type your password"
-          />
-        </FieldWrapper>
+        <Fields>
+          <FieldWrapper>
+            <Icon src={userIcon} alt="userIcon" />
+            <Input name="Email" type="email" placeholder="Type you email" />
+          </FieldWrapper>
+          <FieldWrapper>
+            <Icon src={pswIcon} alt="pswIcon" />
+            <Input
+              name="Password"
+              type="password"
+              placeholder="Type your password"
+            />
+          </FieldWrapper>
+        </Fields>
         <ForgotPassword to="/ForgotPassword">Forgot password?</ForgotPassword>
-        <SubmitButton>LOGIN</SubmitButton>
+        <SubmitButton onClick={navigateHomePage}>LOGIN</SubmitButton>
+        <RegisterField>OR
+          <SubmitButton onClick={navigateRegister}>REGISTER</SubmitButton>
+        </RegisterField>
       </Form>
     </Wrapper>
   );
