@@ -1,6 +1,5 @@
 import styled,{ keyframes } from "styled-components";
 import { Link } from "react-router-dom";
-import Lottie from 'lottie-react';
 
 const HeaderKeyFrame = keyframes`
     0% {
@@ -17,15 +16,14 @@ const HeaderKeyFrame = keyframes`
 export const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  flex-direction: column;
   display: flex;
+  justify-content: center;
   align-items: center;
   background-image: linear-gradient(      217deg,      rgba(0,255,159, 0.8),      rgb(165 43 43 / 0%) 70.71%    ), linear-gradient(127deg, rgba(0,184,255, 0.8), rgba(0,30,255, 0) 70.71%),    linear-gradient(358deg, rgba(189,0,255, 0.8), rgba(214,0,255, 0) 70.71%);
   background-position: top center;
   animation: ${HeaderKeyFrame} 4500ms ease infinite;
   background-size: 200% 100%;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  gap: 20px;
 `;
 
 export const Form = styled.form`
@@ -36,7 +34,7 @@ export const Form = styled.form`
   border-radius: 20px;
   box-shadow: 1px 0px 20px black;
   background-color: white;
-  gap: 18px;
+  gap: 15px;
   width: 20rem;
 `;
 
@@ -61,34 +59,25 @@ export const FieldWrapper = styled.div`
   flex-direction: row;
 `;
 
-export const Fields = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-`;
-
 export const Input = styled.input`
   width: 100%;
   padding: 4px;
   border: none;
   border-bottom: 1px solid grey;
   outline: none;
-  font-size: 1rem;
   &::placeholder {
     font-size: 1rem;
   }
 `;
 
-export const Title = styled.h1`
-font-family:'Impact', fantasy	;
-font-size: 6rem;
-font-weight: 400;
+export const Title = styled.img`
+  margin-block: 0;
 `;
 
 export const Icon = styled.img`
 padding: 3px;
-height: 21px;
-width: 21px;
+height: 18px;
+width: 18px;
 border-inline-color: #e4e4e4;
 padding-right: 5px;
 border-bottom: 1px solid grey;
@@ -98,22 +87,4 @@ export const ForgotPassword = styled(Link)`
   align-self: flex-end;
 `;
 
-export const LottieLogo = styled(Lottie)`
-  duration: 0.001;
-  height:65%;
-  width: 65%;
-  padding-top: 70px;
-  padding-right: 10px;
-`;
 
-export const LogoWrapper = styled.div`
-  display: flex;
-`;
-
-export const RegisterField = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-weight: bold;
-  gap:18px;
-`;
