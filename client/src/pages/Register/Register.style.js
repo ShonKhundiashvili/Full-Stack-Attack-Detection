@@ -65,11 +65,11 @@ export const Form = styled.form`
   box-shadow: 1px 0px 20px black;
   background-color: white;
   gap: 35px;
-  width: 25rem;
-  height: 28rem;
+  width: 30rem;
+  height: 35rem;
 `;
 
-export const Button = styled.button`
+export const RegisterButton = styled.button`
   background-color: #e4e4e4;
   color: black;
   border-radius: 30px;
@@ -85,8 +85,17 @@ export const Button = styled.button`
   }
 `;
 
-export const AlingP = styled.p`
+export const WrapParagraphAndLink = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  gap: 8px;
 `;
 
+export const AlignSelections = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+`;
