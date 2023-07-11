@@ -35,7 +35,7 @@ function Login() {
   }
 
   function navigateRegister() {
-    navigate('/home');
+    navigate('/register');
   }
 
   return (

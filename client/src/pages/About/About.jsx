@@ -1,11 +1,12 @@
 import {
     Wrapper,
-} from "./UserProfile.style";
+} from "./About.style";
 
 import NavBar from "../../components/NavBar/NavBar";
 
 
-function Profile() {
+
+function About() {
 
     return (
         <Wrapper>
@@ -14,4 +15,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default About;

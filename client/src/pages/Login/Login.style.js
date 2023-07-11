@@ -99,10 +99,10 @@ export const ForgotPassword = styled(Link)`
 `;
 
 export const LottieLogo = styled(Lottie)`
-  duration: 0.001;
-  height:65%;
-  width: 65%;
-  padding-top: 70px;
+  animation-duration: 0.001;
+  height:9rem;
+  width: 9rem;
+  padding-top: 77px;
   padding-right: 10px;
 `;
 
