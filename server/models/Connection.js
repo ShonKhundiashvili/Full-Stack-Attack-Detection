@@ -3,10 +3,9 @@ require("dotenv").config();
 mongoose.set("strictQuery", true);
 
 try {
-  const userName = process.env.USER_NAME;
-  const password = process.env.PASSWORD;
-  console.log(userName, password);
-  const connectionString = `mongodb+srv://shonkhundiashvili:Qurmangaga979@atackometer.kqmzby9.mongodb.net/`;
+  const userName = process.env.MONGO_USERNAME;
+  const password = process.env.MONGO_PASSWORD;
+  const connectionString = `mongodb+srv://${userName}:${password}@atackometer.kqmzby9.mongodb.net/`;
   mongoose.connect(connectionString, { useNewUrlParser: true });
   const db = mongoose.connection;
 

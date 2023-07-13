@@ -1,6 +1,7 @@
 const db = require("../models/Connection");
 const config = require("../config.json");
 
+//Checking if the user exists in the database by hie email
 const checkUserExists = async (email) => {
   return new Promise(async (resolve, reject) => {
     const userCollection = db.collection("Users");
@@ -12,6 +13,7 @@ const checkUserExists = async (email) => {
   });
 };
 
+//Register of the user
 const insertUser = async (
   email,
   password,
@@ -53,6 +55,7 @@ const insertUser = async (
   });
 };
 
+//Inserting the password to the history so he cant use passwords he used in the past
 const insertPasswordHistory = async (email, password) => {
   const currentDate = new Date();
 
@@ -86,6 +89,7 @@ const isMoreThan3Passwords = async (email) => {
   });
 };
 
+//Deleting the oldest password from the database
 const deleteOldPasswordHistory = (email) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -112,16 +116,20 @@ const deleteOldPasswordHistory = (email) => {
   });
 };
 
+//Getting the time of last time login of the user
 const lastTimeLogin = async (email) => {
   return new Promise(async (resolve, reject) => {
-    const user = await db.collection("Users").findOne({ email }, (err) => {
-      if (err) return reject(err);
+    try {
+      const user = await db.collection("Users").findOne({ email });
       if (user) return resolve(user.lastTimeLogin);
-    });
+    } catch (error) {
+      return reject(error);
+    }
   });
 };
 
-const resetLogins = async (email, db) => {
+//After block duration the logins will go to 0
+const resetLogins = async (email) => {
   return new Promise(async (resolve, reject) => {
     await db
       .collection("Users")
@@ -132,7 +140,8 @@ const resetLogins = async (email, db) => {
   });
 };
 
-const updateTimeStamp = async (email, db) => {
+//When he is blocked i update the time stamp
+const updateTimeStamp = async (email) => {
   return new Promise(async (resolve, reject) => {
     await db
       .collection("Users")
@@ -147,12 +156,57 @@ const updateTimeStamp = async (email, db) => {
   });
 };
 
-const countLogins = async (email, db) => {
+//Counting the amount of logins so I know when to block the user
+const countLogins = async (email) => {
   return new Promise(async (resolve, reject) => {
-    const user = await db.collection("Users").findOne({ email }, (err) => {
-      if (err) return reject(err);
+    try {
+      const user = await db.collection("Users").findOne({ email });
       if (user && user.logins >= config.login_attempts) return resolve(true);
-    });
+      return resolve(false);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+//Finding the real password of the user for auth
+const findUserPassword = async (email) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await db.collection("Users").findOne({ email });
+      if (user) return resolve(user.password);
+      return resolve(null);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+//If his password was not right I increment the logins
+const incrementLogins = async (email) => {
+  return new Promise(async (resolve, reject) => {
+    await db
+      .collection("Users")
+      .updateOne({ email }, { $inc: { logins: 1 } }, (err) => {
+        if (err) return reject(err);
+        return resolve(true);
+      });
+  });
+};
+
+const changeUserPasswordFromEmail = async (email, code) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await db
+        .collection("users_details")
+        .updateOne({ email }, { $set: { password: code } });
+      console.log(
+        "Changing the password of the user with a value from the email"
+      );
+      return true;
+    } catch (error) {
+      throw error;
+    }
   });
 };
 
@@ -166,4 +220,7 @@ module.exports = {
   resetLogins,
   updateTimeStamp,
   countLogins,
+  findUserPassword,
+  incrementLogins,
+  changeUserPasswordFromEmail,
 };
